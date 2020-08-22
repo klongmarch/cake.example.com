@@ -28,6 +28,8 @@ use Cake\Controller\Controller;
  */
 class AppController extends Controller
 {
+    protected $session;
+
     /**
      * Initialization hook method.
      *
@@ -41,8 +43,16 @@ class AppController extends Controller
     {
         parent::initialize();
 
+        // Load the AUTH component
+        $this->loadComponent('Auth');
+
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+
+        $this->session = $this->getRequest()->getSession();
+
+        // Deny unauthorized access by default
+        $this->Auth->deny();
 
         /*
          * Enable the following component for recommended CakePHP form protection settings.

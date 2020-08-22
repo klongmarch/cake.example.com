@@ -23,6 +23,7 @@
 
 use Cake\Routing\Route\DashedRoute;
 use Cake\Routing\RouteBuilder;
+use Cake\Routing\Router;
 
 /*
  * The default class to use for all routes
@@ -73,6 +74,15 @@ $routes->scope('/', function (RouteBuilder $builder) {
     $builder->fallbacks();
 });
 
+Router::connect(
+    '/users/login',
+    [
+        'plugin' => 'CakeDC/Users',
+        'controller' => 'Users',
+        'action' => 'login'
+    ]
+);
+
 /*
  * If you need a different set of middleware or none at all,
  * open new scope and define routes there.
@@ -84,3 +94,4 @@ $routes->scope('/', function (RouteBuilder $builder) {
  * });
  * ```
  */
+
